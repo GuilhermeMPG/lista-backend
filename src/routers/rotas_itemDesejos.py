@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from infra.sqlalchemy.config.database import get_db
 from infra.sqlalchemy.repositorios.repositorio_itemDesejo import RepositorioItemDesejo
 from routers.auth_utils import obter_usuario_logado
-from schemas.response_schemas import LoginSucesso
 from schemas.schemas import LoginData, ItemDesejo, Usuario
 from infra.providers import token_provaider, hash_provaider
 

@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from infra.sqlalchemy.config.database import get_db
 from routers.auth_utils import obter_usuario_logado
-from schemas.response_schemas import LoginSucesso
+
 from schemas.schemas import LoginData, Usuario
 from infra.providers import token_provaider, hash_provaider
 
@@ -37,7 +37,7 @@ def listar_usuarios(session: Session = Depends(get_db)):
     return listaDeUsuarios
 
 
-@router.post('/token', response_model=LoginSucesso)
+@router.post('/token')
 def login(login_data: LoginData, session: Session = Depends(get_db)):
     senha = login_data.senha
     email = login_data.email
