@@ -45,6 +45,7 @@ class RepositorioUsuario():
                                                                               dia_fatura=usuario.dia_fatura)
         self.session.execute(update_stmt)
         self.session.commit()
+        return self.obter_por_id(id)
 
     def remover(self, id: int):        
         delete_stmt = delete(models.Usuario).where(models.Usuario.id == id)

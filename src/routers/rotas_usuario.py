@@ -25,12 +25,15 @@ def criar_usuarios(usuario: Usuario, session: Session = Depends(get_db)):
 # criar usiario novo
     usuario.senha = hash_provaider.gerar_hash(usuario.senha)
     usuario_criado = RepositorioUsuario(session).criar(usuario)
-    return usuario_criado
+    return {'detail': 'Usuário criado com sucesso!', 'usuario': usuario_criado}
 
 
 @router.get('/usuarios', status_code=status.HTTP_200_OK, response_model=List[Usuario])
 def listar_usuarios(session: Session = Depends(get_db)):
     listaDeUsuarios = RepositorioUsuario(session).listar()
+    if not listaDeUsuarios:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="Não existe usuarios cadastrados!")
     return listaDeUsuarios
 
 
@@ -49,7 +52,7 @@ def login(login_data: LoginData, session: Session = Depends(get_db)):
 
 # Gerar Token JWT
     token = token_provaider.criar_acess_token({'sub': usuario.email})
-    return LoginSucesso(usuario=usuario, access_token=token)
+    return {'usuario':usuario,'access_token': token, 'token_type': 'bearer'}
 
 
 @router.patch('/usuarios/{id}', status_code=status.HTTP_200_OK)
@@ -68,8 +71,9 @@ def atualizar_usuario(id: int, usuario:Usuario, session: Session = Depends(get_d
     usuario_bd.admin = usuario.admin   if usuario.admin else usuario_bd.admin
     usuario_bd.dia_fatura = usuario.dia_fatura if usuario.dia_fatura else usuario_bd.dia_fatura
     
-    RepositorioUsuario(session).editar(id,usuario_bd)    
-    return {'message': 'Usuário alterado com sucesso!','usuario _alterado':usuario}
+    usuario_bd=RepositorioUsuario(session).editar(id,usuario_bd)        
+    
+    return {'message': 'Usuário atualizado com sucesso!','usuario_atualizado': usuario_bd}  
 
 
 @router.delete('/usuarios/{id}', status_code=status.HTTP_200_OK)
@@ -84,4 +88,4 @@ def remover_usuario(id: int, session: Session = Depends(get_db)):
 
 @router.get('/me', response_model=Usuario)
 def me(ususario: Usuario = Depends(obter_usuario_logado), session: Session = Depends(get_db)):
-    return ususario
+        return {'usuario': ususario}

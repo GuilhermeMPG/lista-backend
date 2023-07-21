@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from infra.sqlalchemy.config.database import criar_db
-from routers import rotas_usuario
+from routers import rotas_usuario, rotas_itemDesejos
 
 
 
@@ -23,3 +23,4 @@ app.add_middleware(CORSMiddleware,allow_origins=origins,
                                   allow_headers=["*"]                            
 )
 app.include_router(rotas_usuario.router)
+app.include_router(rotas_itemDesejos.router)

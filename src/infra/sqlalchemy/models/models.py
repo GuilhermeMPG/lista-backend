@@ -12,19 +12,19 @@ class Usuario(Base):
     ativo = Column(Boolean)
     admin = Column(Boolean)    
     dia_fatura = Column(Integer)
-    listaDeDesejos = relationship('ListaDeDesejos')
+    listaDeDesejos = relationship('ItemDesejo')
     faturas = relationship('Fatura')
 
 
-class ListaDeDesejos(Base):
-    __tablename__ = "listaDeDesejos"
+class ItemDesejo(Base):
+    __tablename__ = "itemDesejo"
     id= Column(Integer, primary_key=True, index=True)
     nome= Column(String(30))
     descricao= Column(String(30))
     prioridade= Column(Integer)
     preco= Column(Float)
-    aquirido= Column(Boolean)
-    usuario_id= Column(Integer, ForeignKey('usuario.id', name='fk_usuario_listaDeDesejos'))
+    adquirido= Column(Boolean)
+    usuario_id= Column(Integer, ForeignKey('usuario.id', name='fk_usuario_itemDesejo'))
 
 
 class Fatura(Base):

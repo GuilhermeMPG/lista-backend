@@ -2,13 +2,13 @@ from pydantic import BaseModel
 from typing import Optional, List
 
 
-class ListaDeDesejos(BaseModel):
+class ItemDesejo(BaseModel):
     id: Optional[str] = None
     nome: str
     descricao: Optional[str] = None
     prioridade: int
     preco: float
-    aquirido: bool
+    adquirido: bool
     usuario_id: str
     class Config:
         orm_mode=True
@@ -29,9 +29,9 @@ class Usuario(BaseModel):
     nome: str
     email: str
     senha: str
-    ativo: Optional[bool] = False
+    ativo: Optional[bool] = True
     admin: Optional[bool] = False
-    listaDeDesejos: Optional[List[ListaDeDesejos]] = None
+    listaDeDesejos: Optional[List[ItemDesejo]] = None
     faturas: Optional[List[Fatura]] = None
     dia_fatura: Optional[int] = None
     class Config:
