@@ -1,0 +1,4 @@
+[run]
+  # Aqui você define o comando de inicialização do seu aplicativo.
+  # Certifique-se de usar a variável de ambiente $PORT para a porta.
+  start = "uvicorn main:app --host 0.0.0.0 --port $PORT --reload"
