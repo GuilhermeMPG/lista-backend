@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-from infra.sqlalchemy.config.database import criar_db
-from routers import rotas_usuario, rotas_itemDesejos
+from src.infra.sqlalchemy.config.database import criar_db
+from src.routers import rotas_usuario, rotas_itemDesejos
 
 
 app = FastAPI()
