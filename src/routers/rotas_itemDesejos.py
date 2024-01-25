@@ -13,7 +13,7 @@ from infra.providers import token_provaider, hash_provaider
 
 router = APIRouter()
 
-@router.post('/item_desejo', status_code=status.HTTP_201_CREATED, response_model=ItemDesejo)
+@router.post('/item_desejo', status_code=status.HTTP_201_CREATED)
 def criar_ItemDesejo(ItemDesejo:ItemDesejo,current_user: Usuario = Depends(obter_usuario_logado), session: Session = Depends(get_db)):
     ItemDesejo.usuario_id = current_user.id
     ItemDesejo_criado = RepositorioItemDesejo(session).criar(ItemDesejo)
@@ -25,7 +25,7 @@ def criar_ItemDesejo(ItemDesejo:ItemDesejo,current_user: Usuario = Depends(obter
 @router.patch('/item_desejo/{id}', status_code=status.HTTP_200_OK)
 def atualizar_ItemDesejo(id:int, itemDesejo:ItemDesejo, current_user: Usuario = Depends(obter_usuario_logado), session: Session = Depends(get_db)):
 
-    itemDesejo_bd:ItemDesejo = RepositorioItemDesejo(session).obter_por_id(id)
+    itemDesejo_bd:ItemDesejo = RepositorioItemDesejo(session).obter_umItem_por_id(id, current_user.id)
     if not itemDesejo_bd:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Item não encontrado!')
@@ -41,7 +41,7 @@ def atualizar_ItemDesejo(id:int, itemDesejo:ItemDesejo, current_user: Usuario = 
    
     return {'message': 'Usuário atualizado com sucesso!', 'item_alterado': itemDesejo_bd  }
 
-@router.get('/item_desejo/', status_code=status.HTTP_200_OK,response_model=List[ItemDesejo])
+@router.get('/item_desejo', status_code=status.HTTP_200_OK)
 def listar_ItemDesejos(id:int=None, current_user: Usuario = Depends(obter_usuario_logado),session: Session = Depends(get_db)):
 
     if current_user.admin and id != None:
@@ -52,9 +52,9 @@ def listar_ItemDesejos(id:int=None, current_user: Usuario = Depends(obter_usuari
     if not ItemDesejos:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Item não encontrado!')
-    return {'message': 'Item encontrado com sucesso!', 'ItemDesejos': ItemDesejos}
+    return ItemDesejos
 @router.get('/item_desejo/{id}',status_code=status.HTTP_200_OK)
-def remover_ItemDesejos(id:int,current_user: Usuario = Depends(obter_usuario_logado), session: Session=Depends(get_db)):
+def obter_ItemDesejo(id:int,current_user: Usuario = Depends(obter_usuario_logado), session: Session=Depends(get_db)):
     if current_user.admin and id:
         item=RepositorioItemDesejo(session).obter_umItem_por_id (id)
     else:        
@@ -62,7 +62,7 @@ def remover_ItemDesejos(id:int,current_user: Usuario = Depends(obter_usuario_log
     if not item:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Item não encontrado!')    
-    return {'message': 'Item encontrado com sucesso!', 'item': item} 
+    return  item 
 
 @router.delete('/item_desejo/{id}',status_code=status.HTTP_200_OK)
 def remover_ItemDesejos(id:int,current_user: Usuario = Depends(obter_usuario_logado), session: Session=Depends(get_db)):

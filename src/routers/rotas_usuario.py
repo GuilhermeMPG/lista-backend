@@ -86,6 +86,6 @@ def remover_usuario(id: int, session: Session = Depends(get_db)):
     return {'message': 'Usuário removido com sucesso!','usuario_removido': usuario_bd }
 
 
-@router.get('/me', response_model=Usuario)
+@router.get('/me')
 def me(ususario: Usuario = Depends(obter_usuario_logado), session: Session = Depends(get_db)):
         return {'usuario': ususario}

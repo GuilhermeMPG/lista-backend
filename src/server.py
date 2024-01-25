@@ -4,23 +4,18 @@ from infra.sqlalchemy.config.database import criar_db
 from routers import rotas_usuario, rotas_itemDesejos
 
 
-
-
-
-
-
-
 app = FastAPI()
 
 origins = ['http://localhost:3000',
+           'http://localhost:4200',
            'https://myapp.vercel.com'
-          ]
+           ]
 criar_db()
-#CORS
-app.add_middleware(CORSMiddleware,allow_origins=origins,
-                                  allow_credentials=True,
-                                  allow_methods=["*"],
-                                  allow_headers=["*"]                            
-)
+# CORS
+app.add_middleware(CORSMiddleware, allow_origins=origins,
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"]
+                   )
 app.include_router(rotas_usuario.router)
 app.include_router(rotas_itemDesejos.router)

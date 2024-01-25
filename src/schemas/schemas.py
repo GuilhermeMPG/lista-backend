@@ -9,7 +9,7 @@ class ItemDesejo(BaseModel):
     prioridade: int
     preco: float
     adquirido: bool
-    usuario_id: str
+    usuario_id: Optional[int]=None
     class Config:
         orm_mode=True
 
