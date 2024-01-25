@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from fastapi import Depends, status, HTTPException
 from typing import List
 from sqlalchemy.orm import Session
-from src.infra.sqlalchemy.config.database import get_db
-from src.infra.sqlalchemy.repositorios.repositorio_itemDesejo import RepositorioItemDesejo
-from src.routers.auth_utils import obter_usuario_logado
-from src.schemas.schemas import LoginData, ItemDesejo, Usuario
-from src.infra.providers import token_provaider, hash_provaider
+from infra.sqlalchemy.config.database import get_db
+from infra.sqlalchemy.repositorios.repositorio_itemDesejo import RepositorioItemDesejo
+from routers.auth_utils import obter_usuario_logado
+from schemas.schemas import LoginData, ItemDesejo, Usuario
+from infra.providers import token_provaider, hash_provaider
 
 
 

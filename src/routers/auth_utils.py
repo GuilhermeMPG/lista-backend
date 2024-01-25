@@ -1,10 +1,10 @@
 from fastapi.security import  OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from src.infra.sqlalchemy.config.database import get_db
-from src.infra.providers import token_provaider
+from infra.sqlalchemy.config.database import get_db
+from infra.providers import token_provaider
 from jose import JWTError
-from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsuario
+from infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsuario
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl='token')
 

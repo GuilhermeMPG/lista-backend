@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from src.infra.sqlalchemy.config.database import Base
+from infra.sqlalchemy.config.database import Base
 
 
 class Usuario(Base):
