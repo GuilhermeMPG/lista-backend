@@ -1,0 +1,22 @@
+# Arquivos de compilação
+__pycache__/
+
+# Arquivos temporários
+*.pyc
+*.pyo
+*.pyd
+
+# Ambiente virtual
+venv/
+venv2/
+env/
+env2/
+.venv/
+.env/
+
+# Arquivos de configuração
+*.pyc
+*.pyo
+.DS_Store
+.idea/
+.vscode/
