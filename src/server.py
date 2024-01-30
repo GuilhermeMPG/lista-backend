@@ -6,10 +6,12 @@ from routers import rotas_usuario, rotas_itemDesejos
 
 app = FastAPI()
 
-origins = ['http://localhost:3000',
-           'http://localhost:4200',
-           'https://myapp.vercel.com'
-           ]
+# origins = ['http://localhost:3000',
+#            'http://localhost:4200',
+#            'https://myapp.vercel.com'
+#            ]
+
+origins = ["*"]
 criar_db()
 # CORS
 app.add_middleware(CORSMiddleware, allow_origins=origins,
