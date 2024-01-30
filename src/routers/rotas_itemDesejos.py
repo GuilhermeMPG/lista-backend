@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from fastapi import Depends, status, HTTPException
 from sqlalchemy.orm import Session
-from infra.sqlalchemy.config.database import get_db
-from infra.sqlalchemy.repositorios.repositorio_itemDesejo import RepositorioItemDesejo
-from routers.auth_utils import obter_usuario_logado
-from schemas.schemas import ItemDesejo, Usuario
+from src.infra.sqlalchemy.config.database import get_db
+from src.infra.sqlalchemy.repositorios.repositorio_itemDesejo import RepositorioItemDesejo
+from src.routers.auth_utils import obter_usuario_logado
+from src.schemas.schemas import ItemDesejo, Usuario
 
 
 
