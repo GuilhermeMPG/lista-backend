@@ -1,15 +1,18 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "/src/server.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "src/server.py"
-        }
-    ]
+     "version": 2,
+     "builds": [
+          {
+               "src": "/src/server.py",
+               "use": "@vercel/python"
+          }
+     ],
+     "env": {
+          "PYTHONPATH": "%VIRTUAL_ENV%\\src;%PYTHONPATH%"
+     },
+     "routes": [
+          {
+               "src": "/(.*)",
+               "dest": "src/server.py"
+          }
+     ]
 }
