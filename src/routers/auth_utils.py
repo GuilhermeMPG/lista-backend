@@ -1,3 +1,12 @@
+import sys
+import os
+
+# Obtém o caminho absoluto do diretório pai do diretório atual (onde está este script)
+caminho_projeto = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Adiciona o caminho do projeto ao sys.path
+sys.path.append(caminho_projeto)
+
 from fastapi.security import  OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
