@@ -89,3 +89,7 @@ def remover_usuario(id: int, session: Session = Depends(get_db)):
 @router.get('/me')
 def me(ususario: Usuario = Depends(obter_usuario_logado), session: Session = Depends(get_db)):
         return {'usuario': ususario}
+
+@router.get("/")
+def read_root():
+    return {"Hello": "World"}
