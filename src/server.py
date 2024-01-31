@@ -22,7 +22,10 @@ app = FastAPI()
 #            'https://myapp.vercel.com'
 #            ]
 
-origins = ["*"]
+origins = ["frontend-wish-list-git-master-guilhermempg.vercel.app",
+           'frontend-wish-list.vercel.app',
+           'frontend-wish-list-k6fco7yji-guilhermempg.vercel.app',
+           ]
 criar_db()
 # CORS
 app.add_middleware(CORSMiddleware, allow_origins=origins,
